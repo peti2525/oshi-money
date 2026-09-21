@@ -398,8 +398,39 @@ function render() {
 
   // 推しカードを更新
   renderOshiHero();
+  renderAllOshiTotal();
 }
 
+function renderAllOshiTotal() {
+
+  const planned =
+    state.entries
+      .filter(e =>
+        e.type === 'planned'
+      )
+      .reduce(
+        (sum, e) =>
+          sum + Number(e.amount),
+        0
+      );
+
+  const actual =
+    state.entries
+      .filter(e =>
+        e.type === 'actual'
+      )
+      .reduce(
+        (sum, e) =>
+          sum + Number(e.amount),
+        0
+      );
+
+  $('allOshiPlanned').textContent =
+    yen(planned);
+
+  $('allOshiActual').textContent =
+    yen(actual);
+}
 
 /* =========================
    サマリー
