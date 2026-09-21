@@ -612,12 +612,24 @@ function renderOshiList() {
       const color =
         state.oshiColors[name] || '#eeeeee';
 
+      const icon =
+        state.oshiIcons?.[name] || '⭐';
+
       return `
         <div
           class="oshiRow"
           style="background:${color}"
         >
           <span>${escapeHtml(name)}</span>
+
+          <input
+            type="text"
+            value="${escapeHtml(icon)}"
+            maxlength="2"
+            data-name="${escapeHtml(name)}"
+            class="oshiIcon"
+            title="推しアイコン"
+          >
 
           <input
             type="color"
@@ -637,6 +649,26 @@ function renderOshiList() {
         </div>
       `;
     }).join('');
+
+  document
+    .querySelectorAll('.oshiIcon')
+    .forEach(input => {
+
+      input.onchange = () => {
+
+        const name =
+          input.dataset.name;
+
+        if (!state.oshiIcons) {
+          state.oshiIcons = {};
+        }
+
+        state.oshiIcons[name] =
+          input.value || '⭐';
+
+        save();
+      };
+    });
 
   document
     .querySelectorAll('.oshiColor')
@@ -681,6 +713,7 @@ function renderOshiList() {
 
         state.oshis.splice(index, 1);
         delete state.oshiColors[name];
+        delete state.oshiIcons[name];
 
         save();
       };
