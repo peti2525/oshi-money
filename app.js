@@ -1319,7 +1319,6 @@ function renderOshiHero() {
   heroPlanned.textContent =
     yen(planned);
 
-  heroActual.textContent =
-    yen(actual);
-}'⭐ ' + oshi;
+heroActual.textContent =
+  yen(actual);
 }
