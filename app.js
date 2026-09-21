@@ -8,6 +8,7 @@ const LocalNotifications =
 const KEY = 'oshi-money-v1';
 
 let editingEntryId = null;
+let currentOshiIndex = 0;
 
 let state = JSON.parse(localStorage.getItem(KEY) || 'null') || {
   budget: 20000,
@@ -1346,7 +1347,6 @@ function renderOshiHero() {
     yen(actual);
 }
 
-let currentOshiIndex = 0;
 
 function changeOshiHero(direction) {
 
