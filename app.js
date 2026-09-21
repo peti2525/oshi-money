@@ -1326,8 +1326,11 @@ function renderOshiHero() {
   const oshi =
     oshis[currentOshiIndex];
 
-  heroName.textContent =
-    '⭐ ' + oshi;
+ const icon =
+  state.oshiIcons?.[oshi] || '⭐';
+
+heroName.textContent =
+  icon + ' ' + oshi;
 
   const color =
     state.oshiColors[oshi] || '#eadcff';
