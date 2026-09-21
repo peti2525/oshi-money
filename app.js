@@ -1262,12 +1262,13 @@ function renderOshiHero() {
     return;
   }
 
-  if (!state.oshis || state.oshis.length === 0) {
+  const oshi =
+    state.oshis.find(name => name !== '未設定');
+
+  if (!oshi) {
     heroName.textContent = '推しを登録しよう！';
     return;
   }
-
-  const oshi = state.oshis[0];
 
   heroName.textContent = '⭐ ' + oshi;
 }
