@@ -1,0 +1,29 @@
+*{box-sizing:border-box}body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Noto Sans JP",sans-serif;background:#f5f6fa;color:#222}header{background:#fff;padding:18px 16px 10px;position:sticky;top:0;z-index:2;border-bottom:1px solid #ddd}h1{font-size:22px;margin:0}main{max-width:720px;margin:auto;padding:12px 12px 40px}.grid4{display:grid;grid-template-columns:repeat(2,1fr);gap:8px}.summary div{background:#fff;border-radius:12px;padding:12px;box-shadow:0 1px 4px #ddd}.summary span{display:block;font-size:12px;color:#666}.summary strong{display:block;font-size:19px;margin-top:5px}.tabs{display:grid;grid-template-columns:repeat(4,1fr);gap:5px;margin:12px 0}.tabs button{border:0;border-radius:10px;padding:10px 4px;background:#e9e9ee}.tabs button.active{background:#333;color:#fff}.tab{display:none}.tab.active{display:block}.card{background:#fff;border-radius:14px;padding:15px;margin-bottom:12px;box-shadow:0 1px 5px #ddd}h2{font-size:17px;margin:0 0 12px}.item{border-top:1px solid #eee;padding:11px 0}.item:first-child{border-top:0}.muted{color:#777;font-size:12px}.amount{font-weight:700}.row{display:flex;gap:8px}.row input{flex:1}label{display:block;font-size:13px;margin:10px 0}input,select,button{font:inherit}input,select{width:100%;padding:10px;border:1px solid #ccc;border-radius:9px;background:#fff}button{border:0;border-radius:9px;padding:10px 13px;background:#333;color:#fff;cursor:pointer;margin-top:5px}.danger{background:#a33}.calHead{display:flex;align-items:center;justify-content:space-between}.calHead button{width:42px;font-size:22px;margin:0}.calHead h2{margin:0}.calendarGrid{display:grid;grid-template-columns:repeat(7,1fr);gap:3px}.day{min-height:52px;border:1px solid #eee;border-radius:7px;padding:5px;font-size:12px;background:#fff}.day.head{min-height:auto;border:0;text-align:center;color:#777}.day.has{background:#f0f0f0}.day.selected{outline:2px solid #333}.day b{display:block}.selected{margin-top:12px}.empty{color:#777;padding:10px 0}.oshiRow{display:flex;justify-content:space-between;align-items:center;border-top:1px solid #eee;padding:10px 0}.oshiRow button{margin:0;background:#777}
+textarea{
+  width:100%;
+  min-height:80px;
+  padding:10px;
+  border:1px solid #ccc;
+  border-radius:9px;
+  background:#fff;
+  font:inherit;
+  resize:vertical;
+}
+
+.note{
+  margin-top:5px;
+  color:#555;
+  font-size:13px;
+}
+.oshiRow{
+  border-radius:10px;
+  padding:10px;
+  margin-top:6px;
+}
+
+.oshiColor{
+  width:45px;
+  height:35px;
+  padding:2px;
+  margin-left:auto;
+}

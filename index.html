@@ -1,0 +1,246 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>推し活マネー</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header><h1>推し活マネー</h1></header>
+
+<main>
+
+<section class="summary grid4">
+<div><span>今月の実績</span><strong id="actualTotal">¥0</strong></div>
+<div><span>今月の予定</span><strong id="plannedTotal">¥0</strong></div>
+<div><span>今月の予算</span><strong id="budgetTotal">¥20,000</strong></div>
+<div><span>予定込み残り</span><strong id="remainingTotal">¥20,000</strong></div>
+</section>
+
+<nav class="tabs">
+<button data-tab="home" class="active">ホーム</button>
+<button data-tab="calendar">カレンダー</button>
+<button data-tab="add">追加</button>
+<button data-tab="oshi">推し</button>
+</nav>
+
+<section id="home" class="tab active">
+
+<div class="card">
+<h2>これからの予定</h2>
+<div id="plannedList"></div>
+</div>
+
+<div class="card">
+<h2>最近の実績</h2>
+<div id="actualList"></div>
+</div>
+
+<div class="card">
+<h2>設定</h2>
+
+<label>
+今月の予算
+<input id="budgetInput" type="number" min="0" step="100">
+</label>
+
+<button id="saveBudget">予算を保存</button>
+<button id="clearData" class="danger">全データを削除</button>
+
+</div>
+
+</section>
+
+
+<section id="calendar" class="tab">
+
+<div class="card">
+
+<div class="calHead">
+<button id="prevMonth">‹</button>
+<h2 id="monthTitle"></h2>
+<button id="nextMonth">›</button>
+</div>
+
+<div id="calendarGrid" class="calendarGrid"></div>
+
+<div id="selectedDate" class="selected"></div>
+
+</div>
+
+</section>
+
+
+<section id="add" class="tab">
+
+<div class="card">
+
+<h2 id="entryFormTitle">支出を追加</h2>
+
+<label>
+日付
+<input id="date" type="date">
+</label>
+
+<label>
+通知
+<select id="notifyEnabled">
+<option value="no">通知しない</option>
+<option value="yes">通知する</option>
+</select>
+</label>
+
+<label id="notifyTimeLabel">
+通知時刻
+<input id="notifyTime" type="time" value="09:00">
+</label>
+
+<label>
+種類
+<select id="entryType">
+<option value="planned">予定</option>
+<option value="actual">支出済み</option>
+</select>
+</label>
+
+<label>
+金額
+<input id="amount" type="number" min="0" step="1" placeholder="例：3000">
+</label>
+
+<label>
+推し
+<select id="oshiSelect"></select>
+</label>
+
+<label>
+カテゴリ
+<select id="category">
+<option>グッズ</option>
+<option>ライブ・イベント</option>
+<option>CD・円盤</option>
+<option>交通費</option>
+<option>配信・サブスク</option>
+<option>その他</option>
+</select>
+</label>
+
+<label>
+メモ
+<input id="memo" type="text" placeholder="例：ライブTシャツ">
+</label>
+
+<label>
+備考
+<textarea id="note" placeholder="例：会場限定、友達と参加など"></textarea>
+</label>
+
+<button id="addEntry">追加する</button>
+
+</div>
+
+
+<!-- ここから定期支出 -->
+
+<div class="card">
+
+<h2>定期支出を登録</h2>
+
+<label>
+名前
+<input id="recurringName" type="text" placeholder="例：YouTube Premium">
+</label>
+
+<label>
+金額
+<input id="recurringAmount" type="number" min="0" step="1" placeholder="例：1280">
+</label>
+
+<label>
+推し
+<select id="recurringOshiSelect"></select>
+</label>
+
+<label>
+カテゴリ
+<select id="recurringCategory">
+<option>グッズ</option>
+<option>ライブ・イベント</option>
+<option>CD・円盤</option>
+<option>交通費</option>
+<option>配信・サブスク</option>
+<option>その他</option>
+</select>
+</label>
+
+<label>
+繰り返し
+<select id="recurringFrequency">
+<option value="monthly">毎月</option>
+<option value="yearly">毎年</option>
+</select>
+</label>
+
+<label>
+開始日
+<input id="recurringStartDate" type="date">
+</label>
+
+<label>
+通知
+<select id="recurringNotifyEnabled">
+<option value="no">通知しない</option>
+<option value="yes">通知する</option>
+</select>
+</label>
+
+<label id="recurringNotifyTimeLabel">
+通知時刻
+<input id="recurringNotifyTime" type="time" value="09:00">
+</label>
+
+<label>
+備考
+<textarea id="recurringNote" placeholder="例：毎月のサブスク料金"></textarea>
+</label>
+
+<button id="addRecurring">定期支出を登録</button>
+
+</div>
+
+
+<div class="card">
+
+<h2>登録中の定期支出</h2>
+
+<div id="recurringList"></div>
+
+</div>
+
+</section>
+
+
+<section id="oshi" class="tab">
+
+<div class="card">
+
+<h2>推しを管理</h2>
+
+<div class="row">
+<input id="oshiName" placeholder="推しの名前">
+<button id="addOshi">追加</button>
+</div>
+
+<div id="oshiList"></div>
+
+</div>
+
+</section>
+
+</main>
+
+<script src="app.js"></script>
+
+</body>
+</html>
