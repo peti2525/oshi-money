@@ -27,3 +27,73 @@ textarea{
   padding:2px;
   margin-left:auto;
 }
+/* ===== 推し活っぽいデザイン ===== */
+
+body {
+  background: linear-gradient(180deg, #fff7fb 0%, #f6f4ff 100%);
+}
+
+header {
+  background: rgba(255, 255, 255, 0.92);
+  border-bottom: 1px solid #f0ddea;
+}
+
+h1 {
+  color: #6d4c7d;
+  font-weight: 800;
+}
+
+.card {
+  border-radius: 20px;
+  border: 1px solid #f1e5ef;
+  box-shadow: 0 4px 14px rgba(120, 80, 120, 0.08);
+}
+
+.summary div {
+  border-radius: 18px;
+  border: 1px solid #f1e5ef;
+  box-shadow: 0 3px 10px rgba(120, 80, 120, 0.07);
+}
+
+.summary strong {
+  color: #6d4c7d;
+}
+
+.tabs button {
+  background: #f1edf5;
+  color: #6d6470;
+}
+
+.tabs button.active {
+  background: #8e6aa8;
+  color: #fff;
+}
+
+button {
+  background: #8e6aa8;
+}
+
+button:hover {
+  opacity: 0.9;
+}
+
+.danger {
+  background: #c66b7a;
+}
+
+input,
+select,
+textarea {
+  border-color: #e5d8e5;
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+  outline: 2px solid #c9a8d8;
+  border-color: #a87bbb;
+}
+
+.oshiRow {
+  background: #faf7fb;
+}
