@@ -403,11 +403,9 @@ function render() {
 
 function renderAllOshiTotal() {
 
-  const now =
-    new Date();
+  const now = new Date();
 
-  const year =
-    now.getFullYear();
+  const year = now.getFullYear();
 
   const month =
     String(now.getMonth() + 1)
@@ -420,11 +418,12 @@ function renderAllOshiTotal() {
     state.entries
       .filter(e =>
         e.type === 'planned' &&
+        e.date &&
         e.date.startsWith(currentMonth)
       )
       .reduce(
         (sum, e) =>
-          sum + Number(e.amount),
+          sum + Number(e.amount || 0),
         0
       );
 
@@ -432,20 +431,28 @@ function renderAllOshiTotal() {
     state.entries
       .filter(e =>
         e.type === 'actual' &&
+        e.date &&
         e.date.startsWith(currentMonth)
       )
       .reduce(
         (sum, e) =>
-          sum + Number(e.amount),
+          sum + Number(e.amount || 0),
         0
       );
+
+  const total =
+    planned + actual;
 
   $('allOshiPlanned').textContent =
     yen(planned);
 
   $('allOshiActual').textContent =
     yen(actual);
+
+  $('allOshiTotal').textContent =
+    yen(total);
 }
+
 /* =========================
    サマリー
 ========================= */
@@ -1427,9 +1434,6 @@ heroName.textContent =
 
   heroActual.textContent =
     yen(actual);
-  
-  $('allOshiTotal').textContent =
-  yen(planned + actual);
 }
 
 
