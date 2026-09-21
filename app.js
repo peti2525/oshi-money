@@ -11,8 +11,8 @@ let editingEntryId = null;
 
 let state = JSON.parse(localStorage.getItem(KEY) || 'null') || {
   budget: 20000,
-  oshis: ['未設定'],
-  oshiColors: { '未設定': '#eeeeee' },
+  oshis: [],
+　oshiColors: {},
   entries: [],
   recurring: []
 };
