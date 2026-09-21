@@ -97,3 +97,49 @@ textarea:focus {
 .oshiRow {
   background: #faf7fb;
 }
+.oshiHero {
+  padding: 20px;
+  margin-bottom: 12px;
+  border-radius: 22px;
+  background: linear-gradient(135deg, #eadcff, #ffe4f1);
+  border: 1px solid #ead8ef;
+  box-shadow: 0 5px 16px rgba(120, 80, 140, 0.12);
+}
+
+.oshiHeroTitle {
+  font-size: 13px;
+  color: #76567f;
+  font-weight: 700;
+}
+
+.oshiHeroName {
+  font-size: 25px;
+  font-weight: 800;
+  color: #5d4268;
+  margin: 6px 0 18px;
+}
+
+.oshiHeroStats {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+
+.oshiHeroStats div {
+  background: rgba(255, 255, 255, 0.65);
+  padding: 12px;
+  border-radius: 14px;
+}
+
+.oshiHeroStats span {
+  display: block;
+  font-size: 11px;
+  color: #777;
+}
+
+.oshiHeroStats strong {
+  display: block;
+  margin-top: 4px;
+  font-size: 18px;
+  color: #5d4268;
+}
