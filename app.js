@@ -403,10 +403,24 @@ function render() {
 
 function renderAllOshiTotal() {
 
+  const now =
+    new Date();
+
+  const year =
+    now.getFullYear();
+
+  const month =
+    String(now.getMonth() + 1)
+      .padStart(2, '0');
+
+  const currentMonth =
+    `${year}-${month}`;
+
   const planned =
     state.entries
       .filter(e =>
-        e.type === 'planned'
+        e.type === 'planned' &&
+        e.date.startsWith(currentMonth)
       )
       .reduce(
         (sum, e) =>
@@ -417,7 +431,8 @@ function renderAllOshiTotal() {
   const actual =
     state.entries
       .filter(e =>
-        e.type === 'actual'
+        e.type === 'actual' &&
+        e.date.startsWith(currentMonth)
       )
       .reduce(
         (sum, e) =>
@@ -431,7 +446,6 @@ function renderAllOshiTotal() {
   $('allOshiActual').textContent =
     yen(actual);
 }
-
 /* =========================
    サマリー
 ========================= */
