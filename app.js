@@ -1277,7 +1277,15 @@ function renderOshiHero() {
   }
 
   heroName.textContent = '⭐ ' + oshi;
+const hero =
+  $('oshiHero');
 
+const color =
+  state.oshiColors[oshi] || '#eadcff';
+
+hero.style.background =
+  `linear-gradient(135deg, ${color}, #fff)`;
+  
   // 今月
   const now = new Date();
 
