@@ -10,10 +10,11 @@ const KEY = 'oshi-money-v1';
 let editingEntryId = null;
 let currentOshiIndex = 0;
 
-let state = JSON.parse(localStorage.getItem(KEY) || 'null') || {
+llet state = JSON.parse(localStorage.getItem(KEY) || 'null') || {
   budget: 20000,
   oshis: [],
-　oshiColors: {},
+  oshiColors: {},
+  oshiIcons: {},
   entries: [],
   recurring: []
 };
