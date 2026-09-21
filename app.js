@@ -1257,6 +1257,8 @@ updateRecurringNotifyTimeVisibility();
 function renderOshiHero() {
 
   const heroName = $('oshiHeroName');
+  const heroPlanned = $('oshiHeroPlanned');
+  const heroActual = $('oshiHeroActual');
 
   if (!heroName) {
     return;
@@ -1267,8 +1269,57 @@ function renderOshiHero() {
 
   if (!oshi) {
     heroName.textContent = '推しを登録しよう！';
+
+    heroPlanned.textContent = '¥0';
+    heroActual.textContent = '¥0';
+
     return;
   }
 
   heroName.textContent = '⭐ ' + oshi;
+
+  // 今月
+  const now = new Date();
+
+  const year =
+    now.getFullYear();
+
+  const month =
+    String(now.getMonth() + 1).padStart(2, '0');
+
+  const currentMonth =
+    `${year}-${month}`;
+
+  // 今月のこの推しの予定
+  const planned =
+    state.entries
+      .filter(e =>
+        e.oshi === oshi &&
+        e.type === 'planned' &&
+        e.date.startsWith(currentMonth)
+      )
+      .reduce(
+        (sum, e) => sum + Number(e.amount),
+        0
+      );
+
+  // 今月のこの推しの実績
+  const actual =
+    state.entries
+      .filter(e =>
+        e.oshi === oshi &&
+        e.type === 'actual' &&
+        e.date.startsWith(currentMonth)
+      )
+      .reduce(
+        (sum, e) => sum + Number(e.amount),
+        0
+      );
+
+  heroPlanned.textContent =
+    yen(planned);
+
+  heroActual.textContent =
+    yen(actual);
+}'⭐ ' + oshi;
 }
