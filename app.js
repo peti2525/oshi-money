@@ -1427,6 +1427,9 @@ heroName.textContent =
 
   heroActual.textContent =
     yen(actual);
+  
+  $('allOshiTotal').textContent =
+  yen(planned + actual);
 }
 
 
