@@ -393,6 +393,9 @@ function render() {
   renderRecurringList();
   renderOshiList();
   renderCalendar();
+
+  // 推しカードを更新
+  renderOshiHero();
 }
 
 
@@ -1251,3 +1254,20 @@ $('notifyEnabled').onchange =
   updateNotifyTimeVisibility;
 
 updateRecurringNotifyTimeVisibility();
+function renderOshiHero() {
+
+  const heroName = $('oshiHeroName');
+
+  if (!heroName) {
+    return;
+  }
+
+  if (!state.oshi || state.oshi.length === 0) {
+    heroName.textContent = '推しを登録しよう！';
+    return;
+  }
+
+  const oshi = state.oshi[0];
+
+  heroName.textContent = '⭐ ' + oshi;
+}
