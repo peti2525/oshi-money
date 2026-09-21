@@ -1259,46 +1259,60 @@ function renderOshiHero() {
   const heroName = $('oshiHeroName');
   const heroPlanned = $('oshiHeroPlanned');
   const heroActual = $('oshiHeroActual');
+  const hero = $('oshiHero');
 
   if (!heroName) {
     return;
   }
 
-  const oshi =
-    state.oshis.find(name => name !== '未設定');
+  const oshis =
+    state.oshis.filter(
+      name => name !== '未設定'
+    );
 
-  if (!oshi) {
-    heroName.textContent = '推しを登録しよう！';
+  if (oshis.length === 0) {
 
-    heroPlanned.textContent = '¥0';
-    heroActual.textContent = '¥0';
+    heroName.textContent =
+      '推しを登録しよう！';
+
+    heroPlanned.textContent =
+      '¥0';
+
+    heroActual.textContent =
+      '¥0';
 
     return;
   }
 
-  heroName.textContent = '⭐ ' + oshi;
-const hero =
-  $('oshiHero');
+  if (currentOshiIndex >= oshis.length) {
+    currentOshiIndex = 0;
+  }
 
-const color =
-  state.oshiColors[oshi] || '#eadcff';
+  const oshi =
+    oshis[currentOshiIndex];
 
-hero.style.background =
-  `linear-gradient(135deg, ${color}, #fff)`;
-  
-  // 今月
-  const now = new Date();
+  heroName.textContent =
+    '⭐ ' + oshi;
+
+  const color =
+    state.oshiColors[oshi] || '#eadcff';
+
+  hero.style.background =
+    `linear-gradient(135deg, ${color}, #fff)`;
+
+  const now =
+    new Date();
 
   const year =
     now.getFullYear();
 
   const month =
-    String(now.getMonth() + 1).padStart(2, '0');
+    String(now.getMonth() + 1)
+      .padStart(2, '0');
 
   const currentMonth =
     `${year}-${month}`;
 
-  // 今月のこの推しの予定
   const planned =
     state.entries
       .filter(e =>
@@ -1307,11 +1321,11 @@ hero.style.background =
         e.date.startsWith(currentMonth)
       )
       .reduce(
-        (sum, e) => sum + Number(e.amount),
+        (sum, e) =>
+          sum + Number(e.amount),
         0
       );
 
-  // 今月のこの推しの実績
   const actual =
     state.entries
       .filter(e =>
@@ -1320,13 +1334,48 @@ hero.style.background =
         e.date.startsWith(currentMonth)
       )
       .reduce(
-        (sum, e) => sum + Number(e.amount),
+        (sum, e) =>
+          sum + Number(e.amount),
         0
       );
 
   heroPlanned.textContent =
     yen(planned);
 
-heroActual.textContent =
-  yen(actual);
+  heroActual.textContent =
+    yen(actual);
 }
+
+let currentOshiIndex = 0;
+
+function changeOshiHero(direction) {
+
+  const oshis =
+    state.oshis.filter(
+      name => name !== '未設定'
+    );
+
+  if (oshis.length === 0) {
+    return;
+  }
+
+  currentOshiIndex += direction;
+
+  if (currentOshiIndex < 0) {
+    currentOshiIndex = oshis.length - 1;
+  }
+
+  if (currentOshiIndex >= oshis.length) {
+    currentOshiIndex = 0;
+  }
+
+  renderOshiHero();
+}
+
+$('prevOshi').onclick = () => {
+  changeOshiHero(-1);
+};
+
+$('nextOshi').onclick = () => {
+  changeOshiHero(1);
+};
