@@ -1909,3 +1909,35 @@ if (oshiCardVisibility) {
     );
   };
 }
+
+// ====================
+// 計算履歴を削除
+// ====================
+
+const clearCalcHistory =
+  document.getElementById(
+    'clearCalcHistory'
+  );
+
+if (clearCalcHistory) {
+
+  clearCalcHistory.onclick = () => {
+
+    const ok =
+      confirm(
+        '計算履歴をすべて削除しますか？'
+      );
+
+    if (!ok) {
+      return;
+    }
+
+    state.calcHistory = [];
+
+    save();
+
+    renderCalcHistory();
+
+    alert('計算履歴を削除しました！');
+  };
+}
