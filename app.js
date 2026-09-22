@@ -1807,3 +1807,36 @@ if (settingsButton) {
     }
   };
 }
+
+const themeSelect =
+  document.getElementById('themeSelect');
+
+function applyTheme(theme) {
+
+  document.body.classList.remove(
+    'theme-purple',
+    'theme-pink',
+    'theme-blue',
+    'theme-green',
+    'theme-gray'
+  );
+
+  document.body.classList.add(
+    'theme-' + theme
+  );
+}
+
+if (themeSelect) {
+
+  themeSelect.onchange = () => {
+
+    applyTheme(
+      themeSelect.value
+    );
+
+  };
+
+  applyTheme(
+    themeSelect.value
+  );
+}
