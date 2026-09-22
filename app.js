@@ -1356,39 +1356,6 @@ updateNotifyTimeVisibility();
 render();
 setupNotificationActions();
 
-if (LocalNotifications) {
-
-  LocalNotifications.addListener(
-    'localNotificationActionPerformed',
-    event => {
-
-      if (
-        event.actionId !== 'mark_paid'
-      ) {
-        return;
-      }
-
-      const entryId =
-        event.notification.extra?.entryId;
-
-      const entry =
-        state.entries.find(
-          e => String(e.id) === String(entryId)
-        );
-
-      if (!entry) {
-        return;
-      }
-
-      entry.type = 'actual';
-
-      save();
-
-      render();
-    }
-  );
-
-}
 
     const entryId =
       event.notification.extra?.entryId;
