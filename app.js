@@ -19,6 +19,10 @@ let state = JSON.parse(localStorage.getItem(KEY) || 'null') || {
   recurring: []
 };
 
+if (!Array.isArray(state.calcHistory)) {
+  state.calcHistory = [];
+}
+
 // 以前のデータとの互換性
 if (!state.oshiColors) {
   state.oshiColors = {};
@@ -431,6 +435,7 @@ function render() {
   // 推しカードを更新
   renderOshiHero();
   renderAllOshiTotal();
+　renderCalcHistory();
 }
 
 function renderAllOshiTotal() {
@@ -1608,11 +1613,25 @@ if (calcEqual) {
         throw new Error();
       }
 
-      calcExpression =
-        String(result);
+      const expression =
+  calcExpression;
 
-      updateCalcDisplay();
+calcExpression =
+  String(result);
 
+state.calcHistory.push({
+  expression: expression,
+  result: result
+});
+
+state.calcHistory =
+  state.calcHistory.slice(-10);
+
+save();
+
+updateCalcDisplay();
+renderCalcHistory();
+      
     } catch (error) {
 
       alert('計算できません');
@@ -1629,3 +1648,40 @@ if (calcEqual) {
 
 
 updateCalcDisplay();
+
+// ====================
+// 計算履歴
+// ====================
+
+function renderCalcHistory() {
+
+  const history =
+    document.getElementById('calcHistory');
+
+  if (!history) {
+    return;
+  }
+
+  if (!state.calcHistory.length) {
+
+    history.innerHTML =
+      '<div class="empty">計算履歴はありません</div>';
+
+    return;
+  }
+
+  history.innerHTML =
+    state.calcHistory
+      .slice()
+      .reverse()
+      .map(item => `
+        <div class="calcHistoryItem">
+          <div class="calcHistoryText">
+            ${escapeHtml(item.expression)}
+            ＝
+            <strong>${escapeHtml(String(item.result))}</strong>
+          </div>
+        </div>
+      `)
+      .join('');
+}
