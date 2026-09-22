@@ -324,3 +324,9 @@ body.theme-gray h1,
 body.theme-gray .summary strong {
   color: var(--main-dark);
 }
+
+/* 推しカードの矢印は白固定 */
+.oshiHeroSwitch button {
+  background: rgba(255, 255, 255, 0.7) !important;
+  color: #5d4268 !important;
+}
