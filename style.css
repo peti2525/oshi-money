@@ -174,3 +174,56 @@ textarea:focus {
   max-width: 80px;
   text-align: center;
 }
+
+/* 電卓 */
+
+.calcButtons {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 8px;
+  margin-top: 12px;
+}
+
+.calcButtons button {
+  min-height: 55px;
+  margin: 0;
+  font-size: 20px;
+  font-weight: 700;
+  border-radius: 12px;
+}
+
+.calcEqual {
+  grid-column: span 4;
+  background: #6d4c7d !important;
+}
+
+#calcDisplay {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 14px;
+  border-radius: 12px;
+  background: #fff;
+  color: #333;
+  font-size: 26px !important;
+  font-weight: 700;
+}
+
+#calcHistory {
+  margin-top: 12px;
+}
+
+.calcHistoryItem {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  padding: 10px;
+  margin-top: 8px;
+  border-radius: 10px;
+  background: #f8f3fa;
+}
+
+.calcHistoryText {
+  min-width: 0;
+  word-break: break-all;
+}
