@@ -1853,3 +1853,59 @@ if (themeSelect) {
     );
   };
 }
+
+// ====================
+// 推しカード表示設定
+// ====================
+
+const oshiCardVisibility =
+  document.getElementById(
+    'oshiCardVisibility'
+  );
+
+function applyOshiCardVisibility(
+  visibility
+) {
+
+  const hero =
+    document.getElementById('oshiHero');
+
+  if (!hero) {
+    return;
+  }
+
+  hero.style.display =
+    visibility === 'hide'
+      ? 'none'
+      : '';
+}
+
+if (oshiCardVisibility) {
+
+  const savedVisibility =
+    localStorage.getItem(
+      'oshi-money-oshi-card'
+    ) || 'show';
+
+  oshiCardVisibility.value =
+    savedVisibility;
+
+  applyOshiCardVisibility(
+    savedVisibility
+  );
+
+  oshiCardVisibility.onchange = () => {
+
+    const visibility =
+      oshiCardVisibility.value;
+
+    applyOshiCardVisibility(
+      visibility
+    );
+
+    localStorage.setItem(
+      'oshi-money-oshi-card',
+      visibility
+    );
+  };
+}
