@@ -1559,6 +1559,24 @@ if (calcClear) {
 
 }
 
+// 1文字削除ボタン
+const calcDelete =
+  document.getElementById('calcDelete');
+
+if (calcDelete) {
+
+  calcDelete.addEventListener('click', event => {
+
+    event.preventDefault();
+
+    calcExpression =
+      calcExpression.slice(0, -1);
+
+    updateCalcDisplay();
+
+  });
+
+}
 
 // ＝ボタン
 const calcEqual =
