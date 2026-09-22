@@ -1828,15 +1828,28 @@ function applyTheme(theme) {
 
 if (themeSelect) {
 
-  themeSelect.onchange = () => {
+  const savedTheme =
+    localStorage.getItem(
+      'oshi-money-theme'
+    ) || 'purple';
 
-    applyTheme(
-      themeSelect.value
-    );
-
-  };
+  themeSelect.value =
+    savedTheme;
 
   applyTheme(
-    themeSelect.value
+    savedTheme
   );
+
+  themeSelect.onchange = () => {
+
+    const theme =
+      themeSelect.value;
+
+    applyTheme(theme);
+
+    localStorage.setItem(
+      'oshi-money-theme',
+      theme
+    );
+  };
 }
