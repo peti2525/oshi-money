@@ -1540,7 +1540,8 @@ let calcExpression = '';
 
 function updateCalcDisplay() {
 
-  const display = $('calcDisplay');
+  const display =
+    document.getElementById('calcDisplay');
 
   if (!display) {
     return;
@@ -1550,61 +1551,92 @@ function updateCalcDisplay() {
     calcExpression || '0';
 }
 
+
+// 数字・演算子ボタン
 document
-  .querySelectorAll('[data-calc]')
+  .querySelectorAll('#calculator [data-calc]')
   .forEach(button => {
 
-    button.onclick = () => {
+    button.addEventListener('click', event => {
+
+      event.preventDefault();
 
       calcExpression +=
         button.dataset.calc;
 
       updateCalcDisplay();
-    };
+    });
+
   });
 
-$('calcClear').onclick = () => {
 
-  calcExpression = '';
+// Cボタン
+const calcClear =
+  document.getElementById('calcClear');
 
-  updateCalcDisplay();
-};
+if (calcClear) {
 
-$('calcEqual').onclick = () => {
+  calcClear.addEventListener('click', event => {
 
-  if (!calcExpression) {
-    return;
-  }
-
-  try {
-
-    const result =
-      Function(
-        '"use strict"; return (' +
-        calcExpression +
-        ')'
-      )();
-
-    if (
-      typeof result !== 'number' ||
-      !Number.isFinite(result)
-    ) {
-      throw new Error();
-    }
-
-    calcExpression =
-      String(result);
-
-    updateCalcDisplay();
-
-  } catch (error) {
-
-    alert('計算できません');
+    event.preventDefault();
 
     calcExpression = '';
 
     updateCalcDisplay();
-  }
-};
+
+  });
+
+}
+
+
+// ＝ボタン
+const calcEqual =
+  document.getElementById('calcEqual');
+
+if (calcEqual) {
+
+  calcEqual.addEventListener('click', event => {
+
+    event.preventDefault();
+
+    if (!calcExpression) {
+      return;
+    }
+
+    try {
+
+      const result =
+        Function(
+          '"use strict"; return (' +
+          calcExpression +
+          ')'
+        )();
+
+      if (
+        typeof result !== 'number' ||
+        !Number.isFinite(result)
+      ) {
+        throw new Error();
+      }
+
+      calcExpression =
+        String(result);
+
+      updateCalcDisplay();
+
+    } catch (error) {
+
+      alert('計算できません');
+
+      calcExpression = '';
+
+      updateCalcDisplay();
+
+    }
+
+  });
+
+}
+
 
 updateCalcDisplay();
