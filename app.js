@@ -1674,14 +1674,58 @@ function renderCalcHistory() {
     state.calcHistory
       .slice()
       .reverse()
-      .map(item => `
+      .map((item, index) => `
         <div class="calcHistoryItem">
+
           <div class="calcHistoryText">
             ${escapeHtml(item.expression)}
             ＝
             <strong>${escapeHtml(String(item.result))}</strong>
           </div>
+
+          <button
+            class="calcUseResult"
+            data-history-index="${state.calcHistory.length - 1 - index}"
+          >
+            金額に入力
+          </button>
+
         </div>
       `)
       .join('');
+
+  document
+    .querySelectorAll('.calcUseResult')
+    .forEach(button => {
+
+      button.onclick = () => {
+
+        const index =
+          Number(button.dataset.historyIndex);
+
+        const item =
+          state.calcHistory[index];
+
+        if (!item) {
+          return;
+        }
+
+        const amount =
+          document.getElementById('amount');
+
+        if (amount) {
+          amount.value =
+            item.result;
+        }
+
+        const addTab =
+          document.querySelector(
+            '[data-tab="add"]'
+          );
+
+        if (addTab) {
+          addTab.click();
+        }
+      };
+    });
 }
