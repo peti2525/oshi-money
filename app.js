@@ -1357,26 +1357,6 @@ render();
 setupNotificationActions();
 
 
-    const entryId =
-      event.notification.extra?.entryId;
-
-    const entry =
-      state.entries.find(
-        e => String(e.id) === String(entryId)
-      );
-
-    if (!entry) {
-      return;
-    }
-
-    entry.type = 'actual';
-
-    save();
-
-    render();
-  }
-);
-
 function updateRecurringNotifyTimeVisibility() {
 
   const enabled =
