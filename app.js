@@ -1675,7 +1675,10 @@ function renderCalcHistory() {
       .slice()
       .reverse()
       .map((item, index) => `
-        <div class="calcHistoryItem">
+        <div
+  class="calcHistoryItem"
+  data-history-index="${state.calcHistory.length - 1 - index}"
+>
 
           <div class="calcHistoryText">
             ${escapeHtml(item.expression)}
@@ -1683,12 +1686,12 @@ function renderCalcHistory() {
             <strong>${escapeHtml(String(item.result))}</strong>
           </div>
 
-          <button
-            class="calcUseResult"
-            data-history-index="${state.calcHistory.length - 1 - index}"
-          >
-            金額に入力
-          </button>
+         <button
+  class="calcUseResult"
+  data-history-index="${state.calcHistory.length - 1 - index}"
+>
+  金額に入力
+</button>
 
         </div>
       `)
@@ -1728,4 +1731,46 @@ function renderCalcHistory() {
         }
       };
     });
+  // 履歴をタップして電卓に戻す
+document
+  .querySelectorAll('.calcHistoryItem')
+  .forEach(itemElement => {
+
+    itemElement.onclick = event => {
+
+      // 「金額に入力」ボタンを押した場合は
+      // 電卓に戻らない
+      if (
+        event.target.closest('.calcUseResult')
+      ) {
+        return;
+      }
+
+      const index =
+        Number(
+          itemElement.dataset.historyIndex
+        );
+
+      const historyItem =
+        state.calcHistory[index];
+
+      if (!historyItem) {
+        return;
+      }
+
+      calcExpression =
+        historyItem.expression;
+
+      updateCalcDisplay();
+
+      const calculatorTab =
+        document.querySelector(
+          '[data-tab="calculator"]'
+        );
+
+      if (calculatorTab) {
+        calculatorTab.click();
+      }
+    };
+  });
 }
