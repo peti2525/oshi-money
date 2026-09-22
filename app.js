@@ -1774,3 +1774,36 @@ document
     };
   });
 }
+
+const settingsButton =
+  document.getElementById('settingsButton');
+
+if (settingsButton) {
+
+  settingsButton.onclick = () => {
+
+    const settingsTab =
+      document.querySelector(
+        '[data-tab="settings"]'
+      );
+
+    if (settingsTab) {
+      settingsTab.click();
+      return;
+    }
+
+    const settingsSection =
+      document.getElementById('settings');
+
+    if (settingsSection) {
+
+      document
+        .querySelectorAll('.tab')
+        .forEach(tab => {
+          tab.classList.remove('active');
+        });
+
+      settingsSection.classList.add('active');
+    }
+  };
+}
