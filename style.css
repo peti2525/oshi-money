@@ -243,3 +243,84 @@ header {
   font-size: 13px;
   border-radius: 10px;
 }
+
+/* ====================
+   テーマカラー
+   ==================== */
+
+body.theme-purple {
+  --main-color: #8e6aa8;
+  --main-dark: #6d4c7d;
+  --main-light: #f1edf5;
+}
+
+body.theme-pink {
+  --main-color: #d77a9b;
+  --main-dark: #a95778;
+  --main-light: #f9e8ef;
+}
+
+body.theme-blue {
+  --main-color: #6d91c7;
+  --main-dark: #4d6f9f;
+  --main-light: #e9f0fa;
+}
+
+body.theme-green {
+  --main-color: #6fa67b;
+  --main-dark: #4f7f5a;
+  --main-light: #e9f3eb;
+}
+
+body.theme-gray {
+  --main-color: #777777;
+  --main-dark: #555555;
+  --main-light: #eeeeee;
+}
+
+
+/* ボタン */
+body.theme-purple button {
+  background: var(--main-color);
+}
+
+body.theme-pink button {
+  background: var(--main-color);
+}
+
+body.theme-blue button {
+  background: var(--main-color);
+}
+
+body.theme-green button {
+  background: var(--main-color);
+}
+
+body.theme-gray button {
+  background: var(--main-color);
+}
+
+
+/* タブ */
+body.theme-purple .tabs button.active,
+body.theme-pink .tabs button.active,
+body.theme-blue .tabs button.active,
+body.theme-green .tabs button.active,
+body.theme-gray .tabs button.active {
+  background: var(--main-color);
+}
+
+
+/* 見出し・金額 */
+body.theme-purple h1,
+body.theme-purple .summary strong,
+body.theme-pink h1,
+body.theme-pink .summary strong,
+body.theme-blue h1,
+body.theme-blue .summary strong,
+body.theme-green h1,
+body.theme-green .summary strong,
+body.theme-gray h1,
+body.theme-gray .summary strong {
+  color: var(--main-dark);
+}
