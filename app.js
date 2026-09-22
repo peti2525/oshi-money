@@ -94,6 +94,37 @@ async function cancelEntryNotification(entry) {
   }
 }
 
+async function setupNotificationActions() {
+
+  if (!LocalNotifications) {
+    return;
+  }
+
+  try {
+    await LocalNotifications.registerActionTypes({
+      types: [
+        {
+          id: 'expense_actions',
+          actions: [
+            {
+              id: 'mark_paid',
+              title: '支出済みにする'
+            }
+          ]
+        }
+      ]
+    });
+
+    console.log('通知アクションを登録しました');
+
+  } catch (error) {
+    console.error(
+      '通知アクションの登録に失敗しました',
+      error
+    );
+  }
+}
+
 async function scheduleEntryNotification(entry) {
 
 if (!LocalNotifications) {
@@ -146,7 +177,8 @@ if (!entry.notifyEnabled) {
 
           extra: {
             entryId: entry.id
-          }
+          },
+         actionTypeId: 'expense_actions',
         }
       ]
     });
@@ -1322,6 +1354,37 @@ $('notifyEnabled').onchange =
 updateNotifyTimeVisibility();
 
 render();
+setupNotificationActions();
+
+LocalNotifications.addListener(
+  'localNotificationActionPerformed',
+  event => {
+
+    if (
+      event.actionId !== 'mark_paid'
+    ) {
+      return;
+    }
+
+    const entryId =
+      event.notification.extra?.entryId;
+
+    const entry =
+      state.entries.find(
+        e => String(e.id) === String(entryId)
+      );
+
+    if (!entry) {
+      return;
+    }
+
+    entry.type = 'actual';
+
+    save();
+
+    render();
+  }
+);
 
 function updateRecurringNotifyTimeVisibility() {
 
@@ -1468,3 +1531,80 @@ $('prevOshi').onclick = () => {
 $('nextOshi').onclick = () => {
   changeOshiHero(1);
 };
+
+// ====================
+// 電卓
+// ====================
+
+let calcExpression = '';
+
+function updateCalcDisplay() {
+
+  const display = $('calcDisplay');
+
+  if (!display) {
+    return;
+  }
+
+  display.value =
+    calcExpression || '0';
+}
+
+document
+  .querySelectorAll('[data-calc]')
+  .forEach(button => {
+
+    button.onclick = () => {
+
+      calcExpression +=
+        button.dataset.calc;
+
+      updateCalcDisplay();
+    };
+  });
+
+$('calcClear').onclick = () => {
+
+  calcExpression = '';
+
+  updateCalcDisplay();
+};
+
+$('calcEqual').onclick = () => {
+
+  if (!calcExpression) {
+    return;
+  }
+
+  try {
+
+    const result =
+      Function(
+        '"use strict"; return (' +
+        calcExpression +
+        ')'
+      )();
+
+    if (
+      typeof result !== 'number' ||
+      !Number.isFinite(result)
+    ) {
+      throw new Error();
+    }
+
+    calcExpression =
+      String(result);
+
+    updateCalcDisplay();
+
+  } catch (error) {
+
+    alert('計算できません');
+
+    calcExpression = '';
+
+    updateCalcDisplay();
+  }
+};
+
+updateCalcDisplay();

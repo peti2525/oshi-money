@@ -22,6 +22,7 @@
 <button data-tab="home" class="active">ホーム</button>
 <button data-tab="calendar">カレンダー</button>
 <button data-tab="add">追加</button>
+<button data-tab="calculator">電卓</button>
 <button data-tab="oshi">推し</button>
 </nav>
 
@@ -265,6 +266,53 @@
 
 </section>
 
+<section id="calculator" class="tab">
+
+<div class="card">
+
+<h2>電卓</h2>
+
+<input
+  id="calcDisplay"
+  type="text"
+  readonly
+  value="0"
+  style="font-size:24px;text-align:right;"
+>
+
+<div class="calcButtons">
+
+<button data-calc="7">7</button>
+<button data-calc="8">8</button>
+<button data-calc="9">9</button>
+<button data-calc="/">÷</button>
+
+<button data-calc="4">4</button>
+<button data-calc="5">5</button>
+<button data-calc="6">6</button>
+<button data-calc="*">×</button>
+
+<button data-calc="1">1</button>
+<button data-calc="2">2</button>
+<button data-calc="3">3</button>
+<button data-calc="-">−</button>
+
+<button data-calc="0">0</button>
+<button data-calc=".">.</button>
+<button id="calcClear">C</button>
+<button data-calc="+">＋</button>
+
+<button id="calcEqual" class="calcEqual">＝</button>
+
+</div>
+
+<h3>計算履歴</h3>
+
+<div id="calcHistory"></div>
+
+</div>
+
+</section>
 
 <section id="oshi" class="tab">
 
