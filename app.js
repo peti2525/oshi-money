@@ -903,20 +903,30 @@ function renderCalendar() {
 
         // 1～3件 → 個別表示
         calendarContent =
-          entries
-            .map(e => `
-              <div class="calendarEntry">
-                ${escapeHtml(
-                  e.memo ||
-                  e.category
-                )}
-                <span>
-                  ${yen(e.amount)}
-                </span>
-              </div>
-            `)
-            .join('');
+  entries
+    .map(e => {
 
+      const entryColor =
+        state.oshiColors[e.oshi] || '#eeeeee';
+
+      return `
+        <div
+          class="calendarEntry"
+          style="background:${entryColor}"
+        >
+          ${escapeHtml(
+            e.memo ||
+            e.category
+          )}
+
+          <span>
+            ${yen(e.amount)}
+          </span>
+        </div>
+      `;
+    })
+    .join('');
+        
       } else {
 
         // 4件以上 → 合計表示
