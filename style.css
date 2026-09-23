@@ -330,3 +330,35 @@ body.theme-gray .summary strong {
   background: rgba(255, 255, 255, 0.7) !important;
   color: #5d4268 !important;
 }
+
+/* ====================
+   カレンダー内の複数予定
+   ==================== */
+
+.calendarEntry {
+  margin-top: 3px;
+  padding: 2px 4px;
+  border-radius: 5px;
+  background: rgba(255, 255, 255, 0.7);
+  font-size: 9px;
+  line-height: 1.2;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.calendarEntry span {
+  display: block;
+  font-size: 8px;
+  opacity: 0.75;
+}
+
+.calendarMany {
+  margin-top: 5px;
+  padding: 4px;
+  border-radius: 6px;
+  background: rgba(255, 255, 255, 0.75);
+  font-size: 10px;
+  font-weight: 700;
+  line-height: 1.3;
+}
