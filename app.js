@@ -870,7 +870,7 @@ function renderCalendar() {
 
     const total =
       entries.reduce(
-        (sum, e) => sum + e.amount,
+        (sum, e) => sum + Number(e.amount || 0),
         0
       );
 
@@ -895,6 +895,41 @@ function renderCalendar() {
         ? ' selected'
         : '';
 
+    let calendarContent = '';
+
+    if (entries.length > 0) {
+
+      if (entries.length <= 3) {
+
+        // 1～3件 → 個別表示
+        calendarContent =
+          entries
+            .map(e => `
+              <div class="calendarEntry">
+                ${escapeHtml(
+                  e.memo ||
+                  e.category
+                )}
+                <span>
+                  ${yen(e.amount)}
+                </span>
+              </div>
+            `)
+            .join('');
+
+      } else {
+
+        // 4件以上 → 合計表示
+        calendarContent = `
+          <div class="calendarMany">
+            ${entries.length}件
+            <br>
+            合計 ${yen(total)}
+          </div>
+        `;
+      }
+    }
+
     html += `
       <div
         class="day${total ? ' has' : ''}${selected}"
@@ -902,7 +937,7 @@ function renderCalendar() {
         ${background}
       >
         <b>${day}</b>
-        ${total ? yen(total) : ''}
+        ${calendarContent}
       </div>
     `;
   }
@@ -976,7 +1011,6 @@ function renderCalendar() {
       };
     });
 }
-
 
 /* =========================
    通常の支出追加
